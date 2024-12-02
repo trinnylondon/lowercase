@@ -26,8 +26,8 @@ func TestServeHTTP(t *testing.T) {
 				}
 			},
 			next: func(t *testing.T) http.Handler {
-				t.Helper()
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+					t.Helper()
 					if req.URL.String() != "http://localhost/" {
 						t.Fatalf("wanted path %s, got req.URL: %+v", "http://localhost/", req.URL.String())
 					}
@@ -39,8 +39,8 @@ func TestServeHTTP(t *testing.T) {
 			config: &Config{},
 			url:    "http://localhost/Notthis",
 			next: func(t *testing.T) http.Handler {
-				t.Helper()
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+					t.Helper()
 					t.Fatal("got called")
 				})
 			},
